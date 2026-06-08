@@ -23,27 +23,27 @@ body{
 }
 
 .container{
-    width:90%;
-    max-width:700px;
+    width:85%;
+    max-width:500px; /* Reduzido de 700px para ficar mais compacto */
     text-align:center;
     background:rgba(255,255,255,0.15);
     backdrop-filter: blur(15px);
-    padding:40px;
-    border-radius:30px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.2);
-    display: none; /* Começa escondido para esperar o clique inicial */
+    padding:25px; /* Reduzido de 40px */
+    border-radius:20px; /* Elementos mais delicados */
+    box-shadow:0 8px 32px rgba(0,0,0,0.15);
+    display: none; 
 }
 
 .btn-iniciar {
-    padding: 15px 30px;
-    font-size: 1.2rem;
+    padding: 12px 25px; /* Reduzido */
+    font-size: 1.05rem; /* Reduzido */
     font-weight: bold;
     color: #ee9ca7;
     background: white;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
     transition: 0.3s;
     z-index: 10;
 }
@@ -54,24 +54,25 @@ body{
 }
 
 .foto{
-    width:220px;
-    height:220px;
+    width:160px; /* Reduzido de 220px */
+    height:160px; /* Reduzido de 220px */
     border-radius:50%;
     object-fit:cover;
-    border:6px solid white;
-    box-shadow:0 0 30px rgba(255,255,255,0.8);
-    margin-bottom:25px;
+    border:4px solid white; /* Mais fino */
+    box-shadow:0 0 20px rgba(255,255,255,0.6);
+    margin-bottom:15px;
 }
 
 .frase{
-    font-size:1.7rem;
+    font-size:1.3rem; /* Reduzido de 1.7rem para não quebrar tantas linhas no celular */
     color:white;
     font-weight:600;
     opacity:0;
-    transform:translateY(30px);
-    transition:1s; /* Transição um pouco mais rápida */
-    margin-top:20px;
-    text-shadow:2px 2px 10px rgba(0,0,0,0.3);
+    transform:translateY(20px);
+    transition:1s; 
+    margin-top:15px;
+    text-shadow:1px 1px 8px rgba(0,0,0,0.25);
+    line-height: 1.4;
 }
 
 .show{
@@ -83,7 +84,7 @@ body{
     position:absolute;
     color:white;
     font-size:25px;
-    animation:subir 6s linear infinite; /* Subida um pouco mais rápida */
+    animation:subir 6s linear infinite; 
     z-index: -1;
 }
 
@@ -101,11 +102,13 @@ body{
 </head>
 <body>
 
+<!-- Botão inicial -->
 <button id="btnPlay" class="btn-iniciar">Abrir Recado ❤️</button>
 
 <div class="container" id="conteudo">
 
-    <img src="fernanda.jpeg" class="foto" alt="Sua Foto">
+    <!-- TROQUE foto.jpg PELA FOTO DELA -->
+    <img src="fernanda.jpeg" class="foto" alt="Foto">
 
     <div id="f1" class="frase">
         Bom dia, bom dia coisa linda ☕
@@ -128,45 +131,46 @@ body{
 
 </div>
 
-<div id="musica-container"></div>
+<!-- Elemento HTML5 nativo para tocar MP3 (sem propagandas e funciona 100% no celular) -->
+<audio id="musica">
+    <!-- COLOQUE O SEU ARQUIVO MP3 AQUI -->
+    <!-- Exemplo local: src="musica.mp3" -->
+    <!-- Exemplo online: src="https://seusite.com/musica.mp3" -->
+    <source src="Jade LeMac.mp3" type="audio/mpeg">
+    Seu navegador não suporta o elemento de áudio.
+</audio>
 
 <script>
 const btnPlay = document.getElementById('btnPlay');
 const conteudo = document.getElementById('conteudo');
-const musicaContainer = document.getElementById('musica-container');
+const musica = document.getElementById('musica');
 
 btnPlay.addEventListener('click', () => {
-    // Esconde o botão e mostra a surpresa
+    // Esconde o botão e mostra o conteúdo
     btnPlay.style.display = 'none';
     conteudo.style.display = 'block';
 
-    // Injeta o player de música começando em 55 segundos (35 segundos mais cedo que o normal)
-    musicaContainer.innerHTML = `
-        <iframe
-            id="player"
-            width="0"
-            height="0"
-            src="https://www.youtube.com/embed/HOxwjTsKGDI?autoplay=1&start=55&enablejsapi=1"
-            allow="autoplay"
-            style="display:none">
-        </iframe>
-    `;
+    // Configura a música para iniciar exatamente em 55 segundos
+    musica.currentTime = 55; 
+    
+    // Toca o arquivo MP3 local (funciona direto no celular após o clique)
+    musica.play().catch(e => console.log("Erro ao tocar áudio:", e));
 
-    // Cronograma das frases (Ritmo mais acelerado)
+    // Cronograma das frases (Ajustado e rápido)
     setTimeout(()=>{
         document.getElementById('f1').classList.add('show');
-    }, 800); // Aparece quase junto com o clique
+    }, 600); 
 
     setTimeout(()=>{
         document.getElementById('f2').classList.add('show');
-    }, 3800); // 3 segundos depois
+    }, 3200); 
 
     setTimeout(()=>{
         document.getElementById('f3').classList.add('show');
-    }, 6800); // 3 segundos depois
+    }, 6200); 
 
     // Inicia a chuva de corações
-    setInterval(criarCoracao, 300);
+    setInterval(criarCoracao, 350);
 });
 
 function criarCoracao(){
@@ -176,7 +180,7 @@ function criarCoracao(){
     c.innerHTML = "❤️";
 
     c.style.left = Math.random()*100+"vw";
-    c.style.fontSize = (20 + Math.random()*30)+"px";
+    c.style.fontSize = (15 + Math.random()*20)+"px"; // Corações um pouco menores também
 
     document.body.appendChild(c);
 
