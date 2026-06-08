@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Você ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    text-align:center;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    padding:40px;
+    border-radius:30px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+}
+
+.foto{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    object-fit:cover;
+    border:6px solid white;
+    box-shadow:0 0 30px rgba(255,255,255,0.8);
+    margin-bottom:25px;
+}
+
+.frase{
+    font-size:1.7rem;
+    color:white;
+    font-weight:600;
+    opacity:0;
+    transform:translateY(30px);
+    transition:1.5s;
+    margin-top:20px;
+    text-shadow:2px 2px 10px rgba(0,0,0,0.3);
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.coracao{
+    position:absolute;
+    color:white;
+    font-size:25px;
+    animation:subir 8s linear infinite;
+}
+
+@keyframes subir{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120px);
+        opacity:0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- TROQUE foto.jpg PELA FOTO DELA -->
+    <img src="fernanda.jpeg" class="foto">
+
+    <div id="f1" class="frase">
+        Bom dia, bom dia coisa linda ☕
+    </div>
+
+    <div id="f2" class="frase">
+        Dormiu bem ? 💤
+    </div>
+
+    <div id="f3" class="frase">
+        Esse é um recado pra você,<br><br>
+
+        tenha um ótimo dia, estou gostando muito de você ❤️<br><br>
+
+        e quero que saiba que mesmo com pouco tempo,<br>
+        queria que ficasse pra sempre 🥹<br><br>
+
+        queria que fosse a última pessoa da minha vida.
+    </div>
+
+</div>
+
+<!-- Música -->
+<iframe
+id="player"
+width="0"
+height="0"
+src="https://www.youtube.com/embed/HOxwjTsKGDI?autoplay=1&start=55"
+allow="autoplay"
+style="display:none">
+</iframe>
+
+<script>
+
+setTimeout(()=>{
+    document.getElementById('f1').classList.add('show');
+},1000);
+
+setTimeout(()=>{
+    document.getElementById('f2').classList.add('show');
+},6000);
+
+setTimeout(()=>{
+    document.getElementById('f3').classList.add('show');
+},11000);
+
+function criarCoracao(){
+    const c = document.createElement("div");
+
+    c.classList.add("coracao");
+    c.innerHTML = "❤️";
+
+    c.style.left = Math.random()*100+"vw";
+    c.style.fontSize = (20 + Math.random()*30)+"px";
+
+    document.body.appendChild(c);
+
+    setTimeout(()=>{
+        c.remove();
+    },8000);
+}
+
+setInterval(criarCoracao,400);
+
+</script>
+
+</body>
+</html>
